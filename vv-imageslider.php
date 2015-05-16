@@ -3,13 +3,13 @@
 /**
  * Plugin Name: VV Imageslider
  * Description: Displays a Slider / Carousel that is specialized for Images with variable Aspect Ratios.
- * Version: 0.1
+ * Version: 0.2
  * Author: Gregor Sondermeier
  * Author URI: https://github.com/DeLaMuerte
  * Network: true
  * License: GPL2
  *
- * Copyright 2015 Gregor Sondermeier  (email : invisiblekidgs@googlemail.com)
+ * Copyright 2015 Gregor Sondermeier  (email: invisiblekidgs@googlemail.com)
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
  * published by the Free Software Foundation.
@@ -32,8 +32,8 @@ function addVVImagesliderStylesAndScripts() {
 
 //    wp_register_script('imagesloaded', plugins_url('js/libs/imagesloaded.pkgd.js', __FILE__));
     wp_register_script('imagesloaded', plugins_url('js/libs/imagesloaded.pkgd.min.js', __FILE__));
-    wp_register_script('vvimageslider', plugins_url('js/vvimageslider.js', __FILE__), array('jquery'), '0.0.1', false);
-    wp_register_script('vvimageslider-run', plugins_url('js/vvimageslider.run.js', __FILE__), array('vvimageslider', 'imagesloaded'), '0.0.1', false);
+    wp_register_script('vvimageslider', plugins_url('js/vvimageslider.js', __FILE__), array('jquery'), '0.2', false);
+    wp_register_script('vvimageslider-run', plugins_url('js/vvimageslider.run.js', __FILE__), array('vvimageslider', 'imagesloaded'), '1.0', false);
 
     wp_enqueue_script('imagesloaded');
     wp_enqueue_script('vvimageslider');
