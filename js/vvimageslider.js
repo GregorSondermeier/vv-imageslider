@@ -98,6 +98,7 @@
          * add the listener to scroll through the DOM elements in flow mode
          */
         function setFlowListener() {
+            console.debug('setFlowListener');
             self.find('.vv-imageslider-trigger-left').mouseenter(function() {
                 startFlow('right', options.hoverSpeedMultiplier);
             });
@@ -160,7 +161,7 @@
          * add the listener to scroll through the DOM elements in step mode
          */
         function setStepListener() {
-
+            console.debug('setStepListener');
         };
     };
 
