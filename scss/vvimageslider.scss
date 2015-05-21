@@ -14,11 +14,19 @@
 		min-width: 100%;
 	}
 
+	&.vv-imageslider-stepmode {
+		ul.vv-imageslider-wrapper {
+			-webkit-transition: left 0.66s ease;
+			transition: left 0.66s ease;
+		}
+	}
+
 	li.vv-imageslider-slide {
 		float: left;
 		overflow-y: hidden;
 
 		img {
+			display: none; // will be overwritten by the plugin. But I want no flickering.
 			margin: 0;
 			max-width: initial !important;
 		}
