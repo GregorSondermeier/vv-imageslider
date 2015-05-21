@@ -3,8 +3,8 @@
  *
  * Displays a Slider / Carousel that is specialized for Images with variable Aspect Ratios.
  *
- * @version: 0.3 (2015-05-21)
- * @author: Gregor Sondermeier (https://github.com/DeLaMuerte/, https://bitbucket.org/GregorDeLaMuerte/)
+ * @version: 0.31 (2015-05-22)
+ * @author: Gregor Sondermeier (https://github.com/DeLaMuerte, https://bitbucket.org/GregorDeLaMuerte)
  * @license: GPL2
  *
  * @todo:
@@ -18,6 +18,10 @@
 (function($) {
 
     $.fn.VVImageslider = function(useroptions) {
+
+        if (!this.length) {
+            return;
+        };
 
         /**
          * options definition

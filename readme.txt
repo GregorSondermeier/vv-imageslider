@@ -15,6 +15,9 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 
 == Changelog ==
 
+= 0.31 (2015-05-22) =
+* removed bug when trying to initialize the plugin when the element is not there
+
 = 0.3 (2015-05-21) =
 * optimized calculation of left rule of the ul: it is now being done on demand instead of on every image load
 * generally made options given by data attributes stronger than options given within jQuery constructor
