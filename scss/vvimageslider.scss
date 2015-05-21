@@ -26,6 +26,7 @@
 		overflow-y: hidden;
 
 		img {
+			display: none; // will be overwritten by the plugin. But I want no flickering.
 			margin: 0;
 			max-width: initial !important;
 		}

@@ -3,24 +3,24 @@
  *
  * Displays a Slider / Carousel that is specialized for Images with variable Aspect Ratios.
  *
- * @version: 0.2 (2015-05-16)
- * @author: Gregor Sondermeier (https://github.com/DeLaMuerte)
+ * @version: 0.3 (2015-05-21)
+ * @author: Gregor Sondermeier (https://github.com/DeLaMuerte/, https://bitbucket.org/GregorDeLaMuerte/)
  * @license: GPL2
  *
  * @todo:
  * - write documentation
  * - implement looping option
- * - scroll per image (done)
- * - fix bug #1: asynchronously filling the slideDimensions array in the imagesLoaded callback
  * - separate scrolling Intervals for hovering and clicking so that mouseup event doesn't stop the scrolling because the user is still on mouseover
  * - use CSS animation instead of JS intervalls, duh!
+ * - add mobile support (partially done - works only in step mode yet)
+ * - maybe do height = options.height / 2 on some mobile devices?
  */
-(function ($) {
+(function($) {
 
     $.fn.VVImageslider = function(useroptions) {
 
         /**
-         * options defintion
+         * options definition
          */
         var defaultoptions = {
             height: 700,
@@ -29,22 +29,29 @@
             intervalTime: 40,
             baseFlowSpeed: 1,
             hoverSpeedMultiplier: 4,
-            clickSpeedMultiplier: 32
+            clickSpeedMultiplier: 32,
+            firstSlide: 0
         };
+
+        // parse the options given with the jQuery constructor
         var options = $.extend(defaultoptions, useroptions);
 
-        if (this.data().mode) {
-            options.mode = this.data().mode;
-        };
+        // parse the options given with data attributes. @note: the attributed options are stronger.
+        options = $.extend(options, this.data());
+
+        /**
+         * this boolean indicates if my device support touch interaction
+         */
+        var touchSupported;
 
         /**
          * the elements that are needed again and again
          */
         var self = this;
         var ul = self.find('ul');
+        var slides = self.find('li.vv-imageslider-slide');
         var imgs = self.find('img');
         var slidecount = imgs.length;
-        var slideDimensions = [];
         var currentSlide = 0;
 
         /**
@@ -54,11 +61,15 @@
         var lastImgWidth = 0;
         var totalWidth = 0;
 
+        /**
+         * the interval for the flow animation
+         */
         var flowInterval;
 
         /**
          * start this thing
          */
+        checkForTouchSupport();
         initStyling();
         addTriggers();
         readImages();
@@ -75,12 +86,26 @@
                 'allowed modes: \'flow\' and \'step\'.');
         }
 
+        /**
+         * find out if we are on a touch device
+         * inspired by https://stackoverflow.com/questions/26442907/detecting-touch-devices-with-jquery
+         */
+        function checkForTouchSupport() {
+            // First try to detect (not entirely reliable)
+            touchSupported = !!('ontouchstart' in window) || !!('onmsgesturechange' in window);
+            // Overwrite/set touch enabled to false on mousemove
+            $(window).on('mousemove', function() { touchSupported = false; });
+            // Overwrite/set touch enabled to true on touchstart
+            $(window).on('touchstart', function () { touchSupported = true; });
+        };
 
         /**
          * read the options and set the chosen dimensions and possibly do other stuff
          */
         function initStyling() {
             self.height(options.height);
+            imgs.height(options.height);
+            imgs.show();
             self.find('li:not(:last-child)').css({'margin-right': options.margin + 'px'});
         };
 
@@ -88,8 +113,10 @@
          * add the triggers to be able to scroll through the content
          */
         function addTriggers() {
-            self.append('<div class="vv-imageslider-trigger vv-imageslider-trigger-left"><span class="vv-imageslider-trigger-icon">&lt;</span></div>');
-            self.append('<div class="vv-imageslider-trigger vv-imageslider-trigger-right"><span class="vv-imageslider-trigger-icon">&gt;</span></div>');
+            if (!touchSupported) {
+                self.append('<div class="vv-imageslider-trigger vv-imageslider-trigger-left"><span class="vv-imageslider-trigger-icon">&lt;</span></div>');
+                self.append('<div class="vv-imageslider-trigger vv-imageslider-trigger-right"><span class="vv-imageslider-trigger-icon">&gt;</span></div>');
+            }
         };
 
         function addStepClasses() {
@@ -100,19 +127,17 @@
          * count all images and set the width for the parent ul container
          */
         function readImages() {
-            imgs.each(function(i, img) {
-                imagesLoaded(img, (function(i) {
-                    var itemWidth = $(img).parents('li.vv-imageslider-slide').outerWidth(true);
-                    // console.debug(i);
-                    slideDimensions[i] = {
-                        width: itemWidth,
-                        left: -1 * totalWidth
-                    };
+            var imgLoad = imagesLoaded(self);
 
-                    lastImgWidth = itemWidth;
-                    totalWidth += itemWidth;
-                    ul.width(totalWidth);
-                })(i));
+            imgLoad.on('progress', function(instance, image) {
+                var itemWidth = $(image.img).parents('li.vv-imageslider-slide').outerWidth(true);
+                lastImgWidth = itemWidth;
+                totalWidth += itemWidth;
+                ul.width(totalWidth);
+            });
+
+            imgLoad.on('always', function() {
+                scrollToSlide(options.firstSlide);
             });
         };
 
@@ -182,21 +207,30 @@
          * add the listener to scroll through the DOM elements in step mode
          */
         function setStepListener() {
-            self.find('.vv-imageslider-trigger-left').click(function() {
-                changeSlide('previous');
-            });
-            self.find('.vv-imageslider-trigger-right').click(function() {
-                changeSlide('next');
-            });
+            if (touchSupported) {
+                self.on('swiperight', function() {
+                    changeSlide('previous');
+                });
+                self.on('swipeleft', function() {
+                    changeSlide('next');
+                });
+            } else {
+                self.find('.vv-imageslider-trigger-left').click(function() {
+                    changeSlide('previous');
+                });
+                self.find('.vv-imageslider-trigger-right').click(function() {
+                    changeSlide('next');
+                });
+            }
         };
 
         /**
-         * changes the slide by setting a new 'left' CSS rule
+         * increments or decrements the currentSlide Integer and then calls scrollToSlide to scroll to that new
+         * currentSlide
          *
          * @param   {String}    target      'previous' or 'next'
          */
         function changeSlide(target) {
-            var newLeft;
             switch (target) {
                 case 'previous':
                     if (currentSlide > 0) {
@@ -210,9 +244,19 @@
                     break;
                 default:
                     break;
-            }
+            };
+            scrollToSlide(currentSlide);
+        };
 
-            newLeft = slideDimensions[currentSlide].left - (slideDimensions[currentSlide].width - containerWidth) / 2;
+        /**
+         * scrolls the slider to a specific slide and focuses that slide centered
+         *
+         * @param   {int}   i       - the slide index
+         */
+        function scrollToSlide(i) {
+            var slideWidth = $(slides[i]).outerWidth(true);
+            var slideLeft = $(slides[i]).position().left * -1;
+            var newLeft = slideLeft - (slideWidth - containerWidth) / 2;
             ul.css({left: newLeft});
         };
     };

@@ -15,6 +15,7 @@
     float: left;
     overflow-y: hidden; }
     .vv-imageslider li.vv-imageslider-slide img {
+      display: none;
       margin: 0;
       max-width: initial !important; }
   .vv-imageslider .vv-imageslider-trigger {

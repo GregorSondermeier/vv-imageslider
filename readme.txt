@@ -15,6 +15,13 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 
 == Changelog ==
 
+= 0.3 (2015-05-21) =
+* optimized calculation of left rule of the ul: it is now being done on demand instead of on every image load
+* generally made options given by data attributes stronger than options given within jQuery constructor
+* height is now being set correctly for each image, too
+* added basic mobile support: the triggers are not shown and the images change with swipe events
+* added option "firstSlide"
+
 = 0.2 (2015-05-16) =
 * renamed the existing mode from 'scrolling' to 'flow'
 * introduced a new mode called 'step'
@@ -26,4 +33,4 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 * added basic functionality for reading images, generating slides and widths and listening for hover- and click-events to offer a smooth scrolling behaviour
 
 == Known Issues ==
-* #1: filling the slideDimensions array in the imagesLoaded callback doesn't work reliable yet because auf the asynchronity
+* [- #1: filling the slideDimensions array in the imagesLoaded callback doesn't work reliable yet because auf the asynchronity -] <- fixed in 0.3
