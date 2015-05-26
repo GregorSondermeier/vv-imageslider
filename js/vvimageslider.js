@@ -3,7 +3,7 @@
  *
  * Displays a Slider / Carousel that is specialized for Images with variable Aspect Ratios.
  *
- * @version: 0.31 (2015-05-22)
+ * @version: 0.32 (2015-05-26)
  * @author: Gregor Sondermeier (https://github.com/DeLaMuerte, https://bitbucket.org/GregorDeLaMuerte)
  * @license: GPL2
  *
@@ -62,7 +62,6 @@
          * Styling variables
          */
         var containerWidth = self.width();
-        var lastImgWidth = 0;
         var totalWidth = 0;
 
         /**
@@ -91,16 +90,11 @@
         }
 
         /**
-         * find out if we are on a touch device
+         * find out if we are on a touch device (not entirely reliable)
          * inspired by https://stackoverflow.com/questions/26442907/detecting-touch-devices-with-jquery
          */
         function checkForTouchSupport() {
-            // First try to detect (not entirely reliable)
             touchSupported = !!('ontouchstart' in window) || !!('onmsgesturechange' in window);
-            // Overwrite/set touch enabled to false on mousemove
-            $(window).on('mousemove', function() { touchSupported = false; });
-            // Overwrite/set touch enabled to true on touchstart
-            $(window).on('touchstart', function () { touchSupported = true; });
         };
 
         /**
@@ -134,9 +128,10 @@
             var imgLoad = imagesLoaded(self);
 
             imgLoad.on('progress', function(instance, image) {
-                var itemWidth = $(image.img).parents('li.vv-imageslider-slide').outerWidth(true);
-                lastImgWidth = itemWidth;
-                totalWidth += itemWidth;
+                var itemWidth = $(image.img).parents('li.vv-imageslider-slide').width();
+                var itemMargin = parseInt($(image.img).parents('li.vv-imageslider-slide').css('margin-right'));
+                $(image.img).parents('li.vv-imageslider-slide').width(itemWidth);
+                totalWidth += itemWidth + itemMargin;
                 ul.width(totalWidth);
             });
 

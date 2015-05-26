@@ -15,8 +15,12 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 
 == Changelog ==
 
+= 0.32 (2015-05-26) =
+* fixed bug that shows empty pages on nav change (was caused by jQuery mobile)
+* fixed last pic bug (was caused by weird width calculation)
+
 = 0.31 (2015-05-22) =
-* removed bug when trying to initialize the plugin when the element is not there
+* fixed bug when trying to initialize the plugin when the element is not there
 
 = 0.3 (2015-05-21) =
 * optimized calculation of left rule of the ul: it is now being done on demand instead of on every image load

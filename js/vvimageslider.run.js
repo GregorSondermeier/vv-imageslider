@@ -1,3 +1,7 @@
-jQuery(document).ready(function () {
-    jQuery('.vv-imageslider').VVImageslider();
-});
+(function($) {
+
+    $(function() {
+        $('.vv-imageslider').VVImageslider();
+    });
+
+})(jQuery);
