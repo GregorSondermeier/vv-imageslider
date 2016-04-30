@@ -10,6 +10,9 @@
   list-style: none;
   margin: 0;
   min-width: 100%;
+  -ms-transition: left 0.66s ease;
+  -o-transition: left 0.66s ease;
+  -moz-transition: left 0.66s ease;
   -webkit-transition: left 0.66s ease;
   transition: left 0.66s ease;
 }
@@ -18,6 +21,9 @@
   float: left;
   overflow-y: hidden;
   opacity: 0.33;
+  -ms-transition: opacity 0.66s ease;
+  -o-transition: opacity 0.66s ease;
+  -moz-transition: opacity 0.66s ease;
   -webkit-transition: opacity 0.66s ease;
   transition: opacity 0.66s ease;
 }
@@ -43,6 +49,9 @@
   background-color: #333333;
   opacity: 0.1;
   cursor: pointer;
+  -ms-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
+  -o-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
+  -moz-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
   -webkit-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
   transition: opacity 0.33s ease, visibility 0s ease 0.33s;
 }
@@ -96,6 +105,41 @@
 .vv-imageslider.vv-imageslide-last .vv-imageslider-trigger.vv-imageslider-trigger-right {
   pointer-events: none;
   opacity: 0;
+}
+
+.vv-imageslider-lightbox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+.vv-imageslider-lightbox img {
+  max-height: calc(100vh - 82px);
+  width: auto;
+}
+
+.vv-imageslider-lightbox-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0.4;
+  -ms-transition: opacity 0.33s ease;
+  -o-transition: opacity 0.33s ease;
+  -moz-transition: opacity 0.33s ease;
+  -webkit-transition: opacity 0.33s ease;
+  transition: opacity 0.33s ease;
 }
 
 /*# sourceMappingURL=vvimageslider.css.map */

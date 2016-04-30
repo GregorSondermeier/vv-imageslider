@@ -12,16 +12,14 @@
 		list-style: none;
 		margin: 0;
 		min-width: 100%;
-		-webkit-transition: left $transition-duration ease;
-		transition: left $transition-duration ease;
+		@include vendorsafe(transition, left $transition-duration ease);
 	}
 
 	li.vv-imageslider-slide {
 		float: left;
 		overflow-y: hidden;
 		opacity: 0.33;
-		-webkit-transition: opacity $transition-duration ease;
-		transition: opacity $transition-duration ease;
+		@include vendorsafe(transition, opacity $transition-duration ease);
 
 		&.vv-imageslider-slide-current {
 			opacity: 1;
@@ -47,8 +45,7 @@
 		background-color: $darkgray;
 		opacity: 0.1;
 		cursor: pointer;
-		-webkit-transition: opacity $transition-duration/2 ease, visibility 0s ease $transition-duration/2;
-		transition: opacity $transition-duration/2 ease, visibility 0s ease $transition-duration/2;
+		@include vendorsafe(transition, opacity $transition-duration/2 ease, visibility 0s ease $transition-duration/2);
 
 		&.vv-imageslider-trigger-left {
 			left: 0;
@@ -92,4 +89,31 @@
 		}
 	}
 
+}
+
+.vv-imageslider-lightbox {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	@include vendorsafe(transform, translate(-50%, -50%));
+	padding: 20px;
+	border: 1px solid $darkgray;
+	border-radius: 4px;
+	background-color: $white;
+
+	img {
+		max-height: calc(100vh - 82px);
+		width: auto;
+	}
+}
+
+.vv-imageslider-lightbox-backdrop {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: $black;
+	opacity: 0.4;
+	@include vendorsafe(transition, opacity $transition-duration/2 ease);
 }

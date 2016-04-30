@@ -12,3 +12,11 @@
 		background: transparent;
 	}
 }
+
+@mixin vendorsafe($attribute, $rule...) {
+	-ms-#{$attribute}: $rule;
+	-o-#{$attribute}: $rule;
+	-moz-#{$attribute}: $rule;
+	-webkit-#{$attribute}: $rule;
+	#{$attribute}: $rule;
+}
