@@ -149,14 +149,15 @@
                 var imgHref = windowHeight > options.mobilemaxheight ? basepath + filename + '.' + fileext : 'javascript:void(0)';
                 var prevpath = basepath + filename + previewsuffix + '.' + fileext;
 
-                // the slide li
-                var vvImagesliderLi = $('<li class="vv-imageslider-slide"><a href="' + imgHref + '"></a></li>');
+                // the slide li and a
+                var vvImagesliderA = $('<a href="' + imgHref + '"></a>');
+                var vvImagesliderLi = $('<li class="vv-imageslider-slide"></li>');
 
                 // preload the image with vanilla JS so it can be loaded before it is being appended
                 // @note: I know, this is a little hacky...
                 var img = new Image();
                 img.onload = function() {
-                    vvImagesliderLi.find('a').append(img);
+                    vvImagesliderA.append(img);
                     updateSlidesDimensions(i, vvImagesliderLi);
                     scrollToSlide(options.firstslide);
                 };
@@ -164,11 +165,21 @@
                 img.alt = prevpath;
                 $(img).height(height);
 
-                // push the current li to the list of li's
-                vvImagesliderLis.push(vvImagesliderLi);
+                // add click listener to image
+                vvImagesliderA.bind('click', function($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    scrollToSlide(i);
+                });
+
+                // append the the a to the li
+                vvImagesliderLi.append(vvImagesliderA);
 
                 // append the slide li to the ul
                 vvImagesliderUl.append(vvImagesliderLi);
+
+                // push the current li to the list of li's
+                vvImagesliderLis.push(vvImagesliderLi);
             });
 
             // append the ul to the div
@@ -309,18 +320,13 @@
             vvImagesliderUl.css({left: newLeft});
 
             // add classes for previous, current, next slide
-            vvImagesliderLis[currentSlide].removeClass('vv-imageslider-slide-previous vv-imageslider-slide-next').addClass('vv-imageslider-slide-current');
+            vvImagesliderUl.children().removeClass('vv-imageslider-slide-previous vv-imageslider-slide-current vv-imageslider-slide-next');
+            vvImagesliderLis[currentSlide].addClass('vv-imageslider-slide-current');
             if (vvImagesliderLis[currentSlide-1]) {
-                vvImagesliderLis[currentSlide-1].removeClass('vv-imageslider-slide-current').addClass('vv-imageslider-slide-previous');
-            }
-            if (vvImagesliderLis[currentSlide-2]) {
-                vvImagesliderLis[currentSlide-2].removeClass('vv-imageslider-slide-previous');
+                vvImagesliderLis[currentSlide-1].addClass('vv-imageslider-slide-previous');
             }
             if (vvImagesliderLis[currentSlide+1]) {
-                vvImagesliderLis[currentSlide+1].removeClass('vv-imageslider-slide-current').addClass('vv-imageslider-slide-next');
-            }
-            if (vvImagesliderLis[currentSlide+2]) {
-                vvImagesliderLis[currentSlide+2].removeClass('vv-imageslider-slide-next');
+                vvImagesliderLis[currentSlide+1].addClass('vv-imageslider-slide-next');
             }
 
             // toggle classes for first/last slide status
