@@ -19,12 +19,24 @@
 	li.vv-imageslider-slide {
 		float: left;
 		overflow-y: hidden;
+		opacity: 0.33;
+		-webkit-transition: opacity $transition-duration ease;
+		transition: opacity $transition-duration ease;
+
+		&.vv-imageslider-slide-current {
+			opacity: 1;
+		}
+		&.vv-imageslider-slide-previous, .vv-imageslider-slide-next {
+			opacity: 0.66;
+		}
 
 		img {
 			// display: none; // will be overwritten by the plugin. But I want no flickering.
 			margin: 0;
 			max-width: initial !important;
 		}
+
+
 	}
 
 	.vv-imageslider-trigger {

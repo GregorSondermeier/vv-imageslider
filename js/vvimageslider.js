@@ -29,7 +29,7 @@
         var defaultoptions = {
             basepath: '',
             height: 1000,
-            background: null,
+            background: '',
             previewsuffix: '',
             mobilemaxheight: 640,
             mobileheight: 350,
@@ -299,20 +299,36 @@
          */
         function scrollToSlide(i) {
             currentSlide = vvImagesliderLis[i] ? i : 0;
+
+            // figure out some stylings
             var isFirstSlide = currentSlide == 0,
                 isLastSlide = currentSlide == vvImagesliderLis.length - 1,
                 slideWidth = vvImagesliderLis[currentSlide].outerWidth(true),
                 slideLeft = vvImagesliderLis[currentSlide].position().left * -1,
                 newLeft = slideLeft - (slideWidth - elemWidth) / 2;
-
             vvImagesliderUl.css({left: newLeft});
 
+            // add classes for previous, current, next slide
+            vvImagesliderLis[currentSlide].removeClass('vv-imageslider-slide-previous vv-imageslider-slide-next').addClass('vv-imageslider-slide-current');
+            if (vvImagesliderLis[currentSlide-1]) {
+                vvImagesliderLis[currentSlide-1].removeClass('vv-imageslider-slide-current').addClass('vv-imageslider-slide-previous');
+            }
+            if (vvImagesliderLis[currentSlide-2]) {
+                vvImagesliderLis[currentSlide-2].removeClass('vv-imageslider-slide-previous');
+            }
+            if (vvImagesliderLis[currentSlide+1]) {
+                vvImagesliderLis[currentSlide+1].removeClass('vv-imageslider-slide-current').addClass('vv-imageslider-slide-next');
+            }
+            if (vvImagesliderLis[currentSlide+2]) {
+                vvImagesliderLis[currentSlide+2].removeClass('vv-imageslider-slide-next');
+            }
+
+            // toggle classes for first/last slide status
             if (isFirstSlide) {
                 vvImageslideElem.addClass('vv-imageslide-first');
             } else {
                 vvImageslideElem.removeClass('vv-imageslide-first');
             }
-
             if (isLastSlide) {
                 vvImageslideElem.addClass('vv-imageslide-last');
             } else {

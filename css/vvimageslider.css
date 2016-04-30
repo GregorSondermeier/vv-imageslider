@@ -17,6 +17,17 @@
 .vv-imageslider li.vv-imageslider-slide {
   float: left;
   overflow-y: hidden;
+  opacity: 0.33;
+  -webkit-transition: opacity 0.66s ease;
+  transition: opacity 0.66s ease;
+}
+
+.vv-imageslider li.vv-imageslider-slide.vv-imageslider-slide-current {
+  opacity: 1;
+}
+
+.vv-imageslider li.vv-imageslider-slide.vv-imageslider-slide-previous, .vv-imageslider li.vv-imageslider-slide .vv-imageslider-slide-next {
+  opacity: 0.66;
 }
 
 .vv-imageslider li.vv-imageslider-slide img {
