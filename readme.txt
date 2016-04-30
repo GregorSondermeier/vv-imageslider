@@ -15,6 +15,21 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 
 == Changelog ==
 
+= 0.5 (2015-07-01) =
+* added mobileheight option
+* added support for window resize
+* added mobilesuffix option for even smaller mobile pictures
+* added mobilemaxheight option for setting the max height for which the mobile pictures and the mobile slider height
+  should be used
+* on mobile devices, the images in a slide are not clickable
+
+= 0.4 (2015-06-27) =
+* initial release that came out of VV Imageslider Obsolete
+
+===========================================
+========= VV Imageslider Obsolete =========
+===========================================
+
 = 0.32 (2015-05-26) =
 * fixed bug that shows empty pages on nav change (was caused by jQuery mobile)
 * fixed last pic bug (was caused by weird width calculation)

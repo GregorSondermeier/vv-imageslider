@@ -1,7 +1,7 @@
 (function($) {
 
     $(function() {
-        $('.vv-imageslider').VVImageslider();
+        $('vv-imageslider').VVImageslider();
     });
 
 })(jQuery);

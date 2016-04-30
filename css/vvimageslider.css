@@ -10,9 +10,6 @@
   list-style: none;
   margin: 0;
   min-width: 100%;
-}
-
-.vv-imageslider.vv-imageslider-stepmode ul.vv-imageslider-wrapper {
   -webkit-transition: left 0.66s ease;
   transition: left 0.66s ease;
 }
@@ -23,7 +20,6 @@
 }
 
 .vv-imageslider li.vv-imageslider-slide img {
-  display: none;
   margin: 0;
   max-width: initial !important;
 }

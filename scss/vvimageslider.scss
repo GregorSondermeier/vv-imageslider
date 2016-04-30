@@ -4,7 +4,7 @@
 .vv-imageslider {
 	position: relative;
 	overflow: hidden;
-	height: $default-height;
+	height: 700px;
 
 	ul.vv-imageslider-wrapper {
 		position: relative;
@@ -12,13 +12,8 @@
 		list-style: none;
 		margin: 0;
 		min-width: 100%;
-	}
-
-	&.vv-imageslider-stepmode {
-		ul.vv-imageslider-wrapper {
-			-webkit-transition: left $transition-duration ease;
-			transition: left $transition-duration ease;
-		}
+		-webkit-transition: left 0.66s ease;
+		transition: left 0.66s ease;
 	}
 
 	li.vv-imageslider-slide {
@@ -26,7 +21,7 @@
 		overflow-y: hidden;
 
 		img {
-			display: none; // will be overwritten by the plugin. But I want no flickering.
+			// display: none; // will be overwritten by the plugin. But I want no flickering.
 			margin: 0;
 			max-width: initial !important;
 		}
@@ -34,11 +29,11 @@
 
 	.vv-imageslider-trigger {
 		position: absolute;
-		width: $trigger-width;
+		width: 150px;
 		height: 100%;
 		top: 0;
 		background-color: $darkgray;
-		opacity: $trigger-opacity;
+		opacity: 0.1;
 		cursor: pointer;
 
 		&.vv-imageslider-trigger-left {
@@ -58,12 +53,12 @@
 		.vv-imageslider-trigger-icon {
 			display: block;
 			position: absolute;
-			top: calc(50% - #{$trigger-icon-dimension / 2});
-			left: calc(50% - #{$trigger-icon-dimension / 2});
-			width: $trigger-icon-dimension;
-			height: $trigger-icon-dimension;
-			line-height: $trigger-icon-dimension;
-			font-size: $trigger-font-size;
+			top: calc(50% - #{$scrollicon-dimension / 2});
+			left: calc(50% - #{$scrollicon-dimension / 2});
+			width: $scrollicon-dimension;
+			height: $scrollicon-dimension;
+			line-height: $scrollicon-dimension;
+			font-size: 100px;
 			color: $white;
 
 			@include unselectable();
