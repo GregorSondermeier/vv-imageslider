@@ -15,6 +15,9 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 
 == Changelog ==
 
+= 0.61 (2016-04-30) =
+* fixed leftTrigger/rightTrigger mixup
+
 = 0.6 (2016-04-30) =
 * hide left/right trigger when on first/last slide
 * unfocused images are being faded out

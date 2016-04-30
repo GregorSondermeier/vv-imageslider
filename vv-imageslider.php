@@ -3,7 +3,7 @@
 /**
  * Plugin Name: VV Imageslider
  * Description: Displays a Slider / Carousel that is specialized for Images with variable Aspect Ratios.
- * Version: 0.6
+ * Version: 0.61
  * Author: Gregor Sondermeier
  * Author URI: https://github.com/DeLaMuerte, https://bitbucket.org/GregorDeLaMuerte
  * Network: true

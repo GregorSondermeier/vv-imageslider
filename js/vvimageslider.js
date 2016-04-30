@@ -3,7 +3,7 @@
  *
  * Displays a Slider / Carousel that is specialized for Images with variable Aspect Ratios.
  *
- * @version: 0.6 (2016-04-30)
+ * @version: 0.61 (2016-04-30)
  * @author: Gregor Sondermeier (https://github.com/DeLaMuerte, https://bitbucket.org/GregorDeLaMuerte)
  * @license: GPL2
  *
@@ -173,7 +173,6 @@
 
                 // add click listener to image
 				if (uiMode == 'mouse') {
-					console.debug('bind lightbox');
 					vvImagesliderA.bind('click', function($event) {
 						$event.preventDefault();
 						$event.stopPropagation();
@@ -274,16 +273,10 @@
          */
         function setListeners() {
             if (uiMode == 'touch') {
-				console.debug('register swipe events');
-				vvImageslideElem.bind('swipe', function() {
-					console.debug('swipe');;
-				});
                 vvImageslideElem.bind('swiperight', function() {
-					console.debug('swiperight');
                     changeSlide('previous');
                 });
                 vvImageslideElem.bind('swipeleft', function() {
-					console.debug('swipeleft');
                     changeSlide('next');
                 });
             }
@@ -291,7 +284,7 @@
                 leftTrigger.bind('click', function() {
                     changeSlide('previous');
                 });
-				leftTrigger.bind('click', function() {
+                rightTrigger.bind('click', function() {
                     changeSlide('next');
                 });
             }
