@@ -35,6 +35,8 @@
 		background-color: $darkgray;
 		opacity: 0.1;
 		cursor: pointer;
+		-webkit-transition: opacity $transition-duration/2 ease, visibility 0s ease $transition-duration/2;
+		transition: opacity $transition-duration/2 ease, visibility 0s ease $transition-duration/2;
 
 		&.vv-imageslider-trigger-left {
 			left: 0;
@@ -65,6 +67,17 @@
 		}
 	}
 
-}
+	&.vv-imageslide-first {
+		.vv-imageslider-trigger.vv-imageslider-trigger-left {
+			pointer-events: none;
+			opacity: 0;
+		}
+	}
+	&.vv-imageslide-last {
+		.vv-imageslider-trigger.vv-imageslider-trigger-right {
+			pointer-events: none;
+			opacity: 0;
+		}
+	}
 
-;
+}

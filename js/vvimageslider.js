@@ -3,7 +3,7 @@
  *
  * Displays a Slider / Carousel that is specialized for Images with variable Aspect Ratios.
  *
- * @version: 0.5 (2015-07-01)
+ * @version: 0.6 (2016-04-30)
  * @author: Gregor Sondermeier (https://github.com/DeLaMuerte, https://bitbucket.org/GregorDeLaMuerte)
  * @license: GPL2
  *
@@ -290,16 +290,32 @@
         };
 
         /**
-         * scrolls the slider to a specific slide and focuses that slide centered
+         * scrolls the slider to a specific slide and focuses that slide centered. adds classes for hiding the triggers
+         * when the current slide is the first/last slide.
          *
          * @param   {int}   i       - the slide index
          */
         function scrollToSlide(i) {
             currentSlide = vvImagesliderLis[i] ? i : 0;
-            var slideWidth = vvImagesliderLis[currentSlide].outerWidth(true);
-            var slideLeft = vvImagesliderLis[currentSlide].position().left * -1;
-            var newLeft = slideLeft - (slideWidth - elemWidth) / 2;
+            var isFirstSlide = currentSlide == 0,
+                isLastSlide = currentSlide == vvImagesliderLis.length - 1,
+                slideWidth = vvImagesliderLis[currentSlide].outerWidth(true),
+                slideLeft = vvImagesliderLis[currentSlide].position().left * -1,
+                newLeft = slideLeft - (slideWidth - elemWidth) / 2;
+
             vvImagesliderUl.css({left: newLeft});
+
+            if (isFirstSlide) {
+                vvImageslideElem.addClass('vv-imageslide-first');
+            } else {
+                vvImageslideElem.removeClass('vv-imageslide-first');
+            }
+
+            if (isLastSlide) {
+                vvImageslideElem.addClass('vv-imageslide-last');
+            } else {
+                vvImageslideElem.removeClass('vv-imageslide-last');
+            }
         };
     };
 

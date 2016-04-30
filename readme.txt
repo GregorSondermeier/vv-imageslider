@@ -15,6 +15,10 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 
 == Changelog ==
 
+= 0.6 (2016-04-30) =
+* hide left trigger when on first slide
+* hide last trigger when on last slide
+
 = 0.5 (2015-07-01) =
 * added mobileheight option
 * added support for window resize

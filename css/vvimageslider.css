@@ -32,6 +32,8 @@
   background-color: #333333;
   opacity: 0.1;
   cursor: pointer;
+  -webkit-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
+  transition: opacity 0.33s ease, visibility 0s ease 0.33s;
 }
 
 .vv-imageslider .vv-imageslider-trigger.vv-imageslider-trigger-left {
@@ -73,6 +75,16 @@
 
 .vv-imageslider .vv-imageslider-trigger .vv-imageslider-trigger-icon::selection {
   background: transparent;
+}
+
+.vv-imageslider.vv-imageslide-first .vv-imageslider-trigger.vv-imageslider-trigger-left {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.vv-imageslider.vv-imageslide-last .vv-imageslider-trigger.vv-imageslider-trigger-right {
+  pointer-events: none;
+  opacity: 0;
 }
 
 /*# sourceMappingURL=vvimageslider.css.map */
