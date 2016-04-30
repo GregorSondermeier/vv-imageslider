@@ -20,6 +20,7 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 * unfocused images are being faded out
 * added background color option
 * added lightbox feature (with preloader spinner from http://preloaders.net/en/circular/water-ripples/)
+* added jQuery Mobile v1.4.5 custom for touch event support
 
 = 0.5 (2015-07-01) =
 * added mobileheight option

@@ -173,6 +173,7 @@
 
                 // add click listener to image
 				if (uiMode == 'mouse') {
+					console.debug('bind lightbox');
 					vvImagesliderA.bind('click', function($event) {
 						$event.preventDefault();
 						$event.stopPropagation();
@@ -273,18 +274,24 @@
          */
         function setListeners() {
             if (uiMode == 'touch') {
-                vvImageslideElem.on('swiperight', function() {
+				console.debug('register swipe events');
+				vvImageslideElem.bind('swipe', function() {
+					console.debug('swipe');;
+				});
+                vvImageslideElem.bind('swiperight', function() {
+					console.debug('swiperight');
                     changeSlide('previous');
                 });
-                vvImageslideElem.on('swipeleft', function() {
+                vvImageslideElem.bind('swipeleft', function() {
+					console.debug('swipeleft');
                     changeSlide('next');
                 });
             }
             if (uiMode == 'mouse') {
-                leftTrigger.click(function() {
+                leftTrigger.bind('click', function() {
                     changeSlide('previous');
                 });
-                rightTrigger.click(function() {
+				leftTrigger.bind('click', function() {
                     changeSlide('next');
                 });
             }

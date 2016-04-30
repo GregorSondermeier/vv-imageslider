@@ -30,9 +30,11 @@ function addVVImagesliderStylesAndScripts() {
     wp_register_style('vvimageslider', plugins_url('css/vvimageslider.css', __FILE__));
     wp_enqueue_style('vvimageslider');
 
+    wp_register_script('jquerymobile', plugins_url('js/libs/jquery.mobile.1.4.5.custom.min.js', __FILE__), array('jquery'), '1.4.5', false);
     wp_register_script('vvimageslider', plugins_url('js/vvimageslider.js', __FILE__), array('jquery'), '0.6', false);
     wp_register_script('vvimageslider-run', plugins_url('js/vvimageslider.run.js', __FILE__), array('vvimageslider'), '1.0', false);
 
+    wp_enqueue_script('jquerymobile');
     wp_enqueue_script('vvimageslider');
     wp_enqueue_script('vvimageslider-run');
 }
