@@ -172,15 +172,17 @@
                 $(previewImg).height(height);
 
                 // add click listener to image
-                vvImagesliderA.bind('click', function($event) {
-                    $event.preventDefault();
-                    $event.stopPropagation();
-                    if (i == currentSlide) {
-                        openLightbox(imgHref);
-                    } else {
-                        scrollToSlide(i);
-                    }
-                });
+				if (uiMode == 'mouse') {
+					vvImagesliderA.bind('click', function($event) {
+						$event.preventDefault();
+						$event.stopPropagation();
+						if (i == currentSlide) {
+							openLightbox(imgHref);
+						} else {
+							scrollToSlide(i);
+						}
+					});
+				}
 
                 // append the the a to the li
                 vvImagesliderLi.append(vvImagesliderA);
@@ -366,15 +368,7 @@
             };
             fullImg.src = imgUrl;
 
-			var scrollTop;
-
-			// lock the body
-			scrollTop = documentBody.scrollTop();
-			documentBody.css({top: -scrollTop + 'px', position: 'fixed', width: '100%'});
-
 			lightboxElem.append(lightboxSpinner);
-			lightboxElem.css({'z-index': getHightestZIndex() + 2});
-			lightboxBackdropElem.css({'z-index': getHightestZIndex() + 1});
 
 			documentBody.append(lightboxElem);
 			documentBody.append(lightboxBackdropElem);
@@ -384,26 +378,10 @@
 		 * closes the lightbox
 		 */
         function closeLightbox() {
-			documentBody.css({top: '', position: '', width: ''});
 			lightboxElem.detach();
 			lightboxElem.empty();
             lightboxBackdropElem.detach();
         };
-
-		/**
-		 * get the highest current z-index
-		 *
-		 * @from:
-		 * http://stackoverflow.com/a/18533520
-		 *
-		 * @returns {Number}		- the hightest z-index of the page
-		 */
-		function getHightestZIndex() {
-			return Math.max.apply(null, documentBody.map(function() {
-				var z;
-				return isNaN(z = parseInt($(this).css("z-index"), 10)) ? 0 : z;
-			}));
-		};
     };
 
 }(jQuery));

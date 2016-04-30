@@ -18,14 +18,14 @@
 	li.vv-imageslider-slide {
 		float: left;
 		overflow-y: hidden;
-		opacity: 0.33;
+		opacity: 0.5;
 		@include vendorsafe(transition, opacity $transition-duration ease);
 
 		&.vv-imageslider-slide-current {
 			opacity: 1;
 		}
 		&.vv-imageslider-slide-previous, .vv-imageslider-slide-next {
-			opacity: 0.66;
+			opacity: 0.75;
 		}
 
 		img {
@@ -93,6 +93,7 @@
 
 .vv-imageslider-lightbox {
 	position: fixed;
+	z-index: 2001;
 	top: 50%;
 	left: 50%;
 	@include vendorsafe(transform, translate(-50%, -50%));
@@ -103,12 +104,14 @@
 
 	img {
 		max-height: calc(100vh - 82px);
+		max-width: calc(100vw - 82px);
 		width: auto;
 	}
 }
 
 .vv-imageslider-lightbox-backdrop {
 	position: fixed;
+	z-index: 2000;
 	top: 0;
 	right: 0;
 	bottom: 0;
