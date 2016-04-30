@@ -1,5 +1,14 @@
+// basic colors
 $black: #000000;
 $white: #ffffff;
 $darkgray: #333333;
 
-$scrollicon-dimension: 56px;
+// general slider rules
+$default-height: 700px;
+$transition-duration: 0.66s;
+
+// left and right triggers
+$trigger-width: 150px;
+$trigger-opacity: 0.1;
+$trigger-icon-dimension: 56px;
+$trigger-font-size: 100px;

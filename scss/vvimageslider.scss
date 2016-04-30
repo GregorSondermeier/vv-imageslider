@@ -4,7 +4,7 @@
 .vv-imageslider {
 	position: relative;
 	overflow: hidden;
-	height: 700px;
+	height: $default-height;
 
 	ul.vv-imageslider-wrapper {
 		position: relative;
@@ -16,8 +16,8 @@
 
 	&.vv-imageslider-stepmode {
 		ul.vv-imageslider-wrapper {
-			-webkit-transition: left 0.66s ease;
-			transition: left 0.66s ease;
+			-webkit-transition: left $transition-duration ease;
+			transition: left $transition-duration ease;
 		}
 	}
 
@@ -34,11 +34,11 @@
 
 	.vv-imageslider-trigger {
 		position: absolute;
-		width: 150px;
+		width: $trigger-width;
 		height: 100%;
 		top: 0;
 		background-color: $darkgray;
-		opacity: 0.1;
+		opacity: $trigger-opacity;
 		cursor: pointer;
 
 		&.vv-imageslider-trigger-left {
@@ -58,12 +58,12 @@
 		.vv-imageslider-trigger-icon {
 			display: block;
 			position: absolute;
-			top: calc(50% - #{$scrollicon-dimension / 2});
-			left: calc(50% - #{$scrollicon-dimension / 2});
-			width: $scrollicon-dimension;
-			height: $scrollicon-dimension;
-			line-height: $scrollicon-dimension;
-			font-size: 100px;
+			top: calc(50% - #{$trigger-icon-dimension / 2});
+			left: calc(50% - #{$trigger-icon-dimension / 2});
+			width: $trigger-icon-dimension;
+			height: $trigger-icon-dimension;
+			line-height: $trigger-icon-dimension;
+			font-size: $trigger-font-size;
 			color: $white;
 
 			@include unselectable();
