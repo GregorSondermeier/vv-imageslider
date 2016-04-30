@@ -29,6 +29,7 @@
         var defaultoptions = {
             basepath: '',
             height: 1000,
+            background: null,
             previewsuffix: '',
             mobilemaxheight: 640,
             mobileheight: 350,
@@ -89,7 +90,7 @@
         setDimensions();
         setPreviewsuffix();
         buildHTML();
-        applyDimensions();
+        applyStyling();
         setResizeListener();
         addTriggers();
         setStepListener();
@@ -187,10 +188,11 @@
         };
 
         /**
-         * read the options and set the chosen dimensions and possibly do other stuff
+         * read the options and set the chosen dimensions, background and possibly do other stuff
          */
-        function applyDimensions() {
+        function applyStyling() {
             vvImageslideElem.height(height);
+            vvImageslideElem.css({background: options.background});
         };
 
         /**
