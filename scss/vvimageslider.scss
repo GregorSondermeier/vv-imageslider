@@ -4,7 +4,7 @@
 .vv-imageslider {
 	position: relative;
 	overflow: hidden;
-	height: 700px;
+	height: $default-height;
 
 	ul.vv-imageslider-wrapper {
 		position: relative;
@@ -12,34 +12,40 @@
 		list-style: none;
 		margin: 0;
 		min-width: 100%;
-	}
-
-	&.vv-imageslider-stepmode {
-		ul.vv-imageslider-wrapper {
-			-webkit-transition: left 0.66s ease;
-			transition: left 0.66s ease;
-		}
+		@include vendorsafe(transition, left $transition-duration ease);
 	}
 
 	li.vv-imageslider-slide {
 		float: left;
 		overflow-y: hidden;
+		opacity: 0.5;
+		@include vendorsafe(transition, opacity $transition-duration ease);
+
+		&.vv-imageslider-slide-current {
+			opacity: 1;
+		}
+		&.vv-imageslider-slide-previous, .vv-imageslider-slide-next {
+			opacity: 0.75;
+		}
 
 		img {
-			display: none; // will be overwritten by the plugin. But I want no flickering.
+			// display: none; // will be overwritten by the plugin. But I want no flickering.
 			margin: 0;
 			max-width: initial !important;
 		}
+
+
 	}
 
 	.vv-imageslider-trigger {
 		position: absolute;
-		width: 150px;
+		width: $trigger-width;
 		height: 100%;
 		top: 0;
 		background-color: $darkgray;
 		opacity: 0.1;
 		cursor: pointer;
+		@include vendorsafe(transition, opacity $transition-duration/2 ease, visibility 0s ease $transition-duration/2);
 
 		&.vv-imageslider-trigger-left {
 			left: 0;
@@ -58,18 +64,59 @@
 		.vv-imageslider-trigger-icon {
 			display: block;
 			position: absolute;
-			top: calc(50% - #{$scrollicon-dimension / 2});
-			left: calc(50% - #{$scrollicon-dimension / 2});
-			width: $scrollicon-dimension;
-			height: $scrollicon-dimension;
-			line-height: $scrollicon-dimension;
-			font-size: 100px;
+			top: calc(50% - #{$trigger-icon-dimension / 2});
+			left: calc(50% - #{$trigger-icon-dimension / 2});
+			width: $trigger-icon-dimension;
+			height: $trigger-icon-dimension;
+			line-height: $trigger-icon-dimension;
+			font-size: $trigger-font-size;
 			color: $white;
 
 			@include unselectable();
 		}
 	}
 
+	&.vv-imageslide-first {
+		.vv-imageslider-trigger.vv-imageslider-trigger-left {
+			pointer-events: none;
+			opacity: 0;
+		}
+	}
+	&.vv-imageslide-last {
+		.vv-imageslider-trigger.vv-imageslider-trigger-right {
+			pointer-events: none;
+			opacity: 0;
+		}
+	}
+
 }
 
-;
+.vv-imageslider-lightbox {
+	position: fixed;
+	z-index: 2001;
+	top: 50%;
+	left: 50%;
+	@include vendorsafe(transform, translate(-50%, -50%));
+	padding: 20px;
+	border: 1px solid $darkgray;
+	border-radius: 4px;
+	background-color: $white;
+
+	img {
+		max-height: calc(100vh - 82px);
+		max-width: calc(100vw - 82px);
+		width: auto;
+	}
+}
+
+.vv-imageslider-lightbox-backdrop {
+	position: fixed;
+	z-index: 2000;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: $black;
+	opacity: 0.4;
+	@include vendorsafe(transition, opacity $transition-duration/2 ease);
+}

@@ -1,57 +1,148 @@
 .vv-imageslider {
   position: relative;
   overflow: hidden;
-  height: 700px; }
-  .vv-imageslider ul.vv-imageslider-wrapper {
-    position: relative;
-    left: 0;
-    list-style: none;
-    margin: 0;
-    min-width: 100%; }
-  .vv-imageslider.vv-imageslider-stepmode ul.vv-imageslider-wrapper {
-    -webkit-transition: left 0.66s ease;
-    transition: left 0.66s ease; }
-  .vv-imageslider li.vv-imageslider-slide {
-    float: left;
-    overflow-y: hidden; }
-    .vv-imageslider li.vv-imageslider-slide img {
-      display: none;
-      margin: 0;
-      max-width: initial !important; }
-  .vv-imageslider .vv-imageslider-trigger {
-    position: absolute;
-    width: 150px;
-    height: 100%;
-    top: 0;
-    background-color: #333333;
-    opacity: 0.1;
-    cursor: pointer; }
-    .vv-imageslider .vv-imageslider-trigger.vv-imageslider-trigger-left {
-      left: 0; }
-    .vv-imageslider .vv-imageslider-trigger.vv-imageslider-trigger-right {
-      right: 0; }
-    .vv-imageslider .vv-imageslider-trigger:hover {
-      opacity: 0.33; }
-    .vv-imageslider .vv-imageslider-trigger:active {
-      opacity: 0.66; }
-    .vv-imageslider .vv-imageslider-trigger .vv-imageslider-trigger-icon {
-      display: block;
-      position: absolute;
-      top: calc(50% - 28px);
-      left: calc(50% - 28px);
-      width: 56px;
-      height: 56px;
-      line-height: 56px;
-      font-size: 100px;
-      color: #ffffff;
-      -ms-user-select: none;
-      -o-user-select: none;
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      user-select: none; }
-      .vv-imageslider .vv-imageslider-trigger .vv-imageslider-trigger-icon::-moz-selection {
-        background: transparent; }
-      .vv-imageslider .vv-imageslider-trigger .vv-imageslider-trigger-icon::selection {
-        background: transparent; }
+  height: 700px;
+}
+
+.vv-imageslider ul.vv-imageslider-wrapper {
+  position: relative;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  min-width: 100%;
+  -ms-transition: left 0.66s ease;
+  -o-transition: left 0.66s ease;
+  -moz-transition: left 0.66s ease;
+  -webkit-transition: left 0.66s ease;
+  transition: left 0.66s ease;
+}
+
+.vv-imageslider li.vv-imageslider-slide {
+  float: left;
+  overflow-y: hidden;
+  opacity: 0.5;
+  -ms-transition: opacity 0.66s ease;
+  -o-transition: opacity 0.66s ease;
+  -moz-transition: opacity 0.66s ease;
+  -webkit-transition: opacity 0.66s ease;
+  transition: opacity 0.66s ease;
+}
+
+.vv-imageslider li.vv-imageslider-slide.vv-imageslider-slide-current {
+  opacity: 1;
+}
+
+.vv-imageslider li.vv-imageslider-slide.vv-imageslider-slide-previous, .vv-imageslider li.vv-imageslider-slide .vv-imageslider-slide-next {
+  opacity: 0.75;
+}
+
+.vv-imageslider li.vv-imageslider-slide img {
+  margin: 0;
+  max-width: initial !important;
+}
+
+.vv-imageslider .vv-imageslider-trigger {
+  position: absolute;
+  width: 150px;
+  height: 100%;
+  top: 0;
+  background-color: #333333;
+  opacity: 0.1;
+  cursor: pointer;
+  -ms-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
+  -o-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
+  -moz-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
+  -webkit-transition: opacity 0.33s ease, visibility 0s ease 0.33s;
+  transition: opacity 0.33s ease, visibility 0s ease 0.33s;
+}
+
+.vv-imageslider .vv-imageslider-trigger.vv-imageslider-trigger-left {
+  left: 0;
+}
+
+.vv-imageslider .vv-imageslider-trigger.vv-imageslider-trigger-right {
+  right: 0;
+}
+
+.vv-imageslider .vv-imageslider-trigger:hover {
+  opacity: 0.33;
+}
+
+.vv-imageslider .vv-imageslider-trigger:active {
+  opacity: 0.66;
+}
+
+.vv-imageslider .vv-imageslider-trigger .vv-imageslider-trigger-icon {
+  display: block;
+  position: absolute;
+  top: calc(50% - 28px);
+  left: calc(50% - 28px);
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  font-size: 100px;
+  color: #ffffff;
+  -ms-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.vv-imageslider .vv-imageslider-trigger .vv-imageslider-trigger-icon::-moz-selection {
+  background: transparent;
+}
+
+.vv-imageslider .vv-imageslider-trigger .vv-imageslider-trigger-icon::selection {
+  background: transparent;
+}
+
+.vv-imageslider.vv-imageslide-first .vv-imageslider-trigger.vv-imageslider-trigger-left {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.vv-imageslider.vv-imageslide-last .vv-imageslider-trigger.vv-imageslider-trigger-right {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.vv-imageslider-lightbox {
+  position: fixed;
+  z-index: 2001;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+.vv-imageslider-lightbox img {
+  max-height: calc(100vh - 82px);
+  max-width: calc(100vw - 82px);
+  width: auto;
+}
+
+.vv-imageslider-lightbox-backdrop {
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0.4;
+  -ms-transition: opacity 0.33s ease;
+  -o-transition: opacity 0.33s ease;
+  -moz-transition: opacity 0.33s ease;
+  -webkit-transition: opacity 0.33s ease;
+  transition: opacity 0.33s ease;
+}
 
 /*# sourceMappingURL=vvimageslider.css.map */
