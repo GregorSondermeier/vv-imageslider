@@ -15,6 +15,9 @@ Another jQuery Imageslider Plugin. The goal of this one though is to look pretty
 
 == Changelog ==
 
+= 0.62 (2016-05-01) =
+* changed default margin between images from -1 to 0 to avoid clipping
+
 = 0.61 (2016-04-30) =
 * fixed leftTrigger/rightTrigger mixup
 

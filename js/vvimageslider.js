@@ -3,7 +3,7 @@
  *
  * Displays a Slider / Carousel that is specialized for Images with variable Aspect Ratios.
  *
- * @version: 0.61 (2016-04-30)
+ * @version: 0.62 (2016-05-01)
  * @author: Gregor Sondermeier (https://github.com/DeLaMuerte, https://bitbucket.org/GregorDeLaMuerte)
  * @license: GPL2
  *
@@ -34,7 +34,7 @@
             mobilemaxheight: 640,
             mobileheight: 350,
             mobilesuffix: '',
-            margin: -1,
+            margin: 0,
             firstslide: 0
         };
 
